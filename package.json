@@ -1,5 +1,6 @@
 {
-  "name": "our-elm-spa-app",
+  "name": "ronilda-homepage",
+  "homepage": "http://artutra.github.io/ronilda.com.br",
   "version": "1.0.0",
   "description": "A project created with elm-spa",
   "scripts": {
@@ -13,7 +14,9 @@
     "build:dev:elm": "elm make src/Main.elm --debug --output=public/dist/elm.compiled.js || true",
     "build:elm-spa": "elm-spa build .",
     "dev:elm": "elm-live src/Main.elm -u -d public -- --debug --output=public/dist/elm.compiled.js",
-    "dev:elm-spa": "chokidar src/Pages -c \"elm-spa build .\""
+    "dev:elm-spa": "chokidar src/Pages -c \"elm-spa build .\"",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +27,7 @@
     "elm-live": "4.0.2",
     "elm-spa": "5.0.4",
     "elm-test": "0.19.1-revision2",
-    "npm-run-all": "4.1.5"
+    "npm-run-all": "4.1.5",
+    "gh-pages": "^3.1.0"
   }
 }
