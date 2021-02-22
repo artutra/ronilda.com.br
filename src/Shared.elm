@@ -5,7 +5,7 @@ module Shared exposing
     , init
     , subscriptions
     , update
-    , view
+    , view, elemId
     )
 
 import Browser.Navigation exposing (Key)
@@ -30,6 +30,9 @@ type alias Model =
     , key : Key
     }
 
+elemId = 
+    { viewportId = "page"
+    }
 
 init : Flags -> Url -> Key -> ( Model, Cmd Msg )
 init flags url key =
@@ -74,7 +77,7 @@ view { page, toMsg } model =
                 [ a [ class "link", href (Route.toString Route.Top) ] [ text "Homepage" ]
                 , a [ class "link", href (Route.toString Route.NotFound) ] [ text "Not found" ]
                 ]
-            , div [ id "page", class "overflow-auto h-screen" ] page.body
+            , div [ id elemId.viewportId, class "overflow-auto h-screen" ] page.body
             ]
         ]
     }
