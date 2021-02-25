@@ -2,7 +2,7 @@ module Pages.Top exposing (Model, Msg, Params, page)
 
 import Browser.Dom exposing (getElement)
 import Html exposing (..)
-import Html.Attributes exposing (class, id)
+import Html.Attributes exposing (class, id, src, style)
 import Html.Events exposing (onClick)
 import Ports exposing (scrollTo, toCmd)
 import Shared as Shared exposing (elemId)
@@ -22,11 +22,12 @@ type alias Model =
 
 type Msg
     = ScrollToElement String
-    | GetElement (Result Browser.Dom.Error Browser.Dom.Element)
+    | GotElement (Result Browser.Dom.Error Browser.Dom.Element)
 
 
 elemId =
-    { about = "about"
+    { header = "header"
+    , about = "about"
     , whoIs = "who-is"
     , services = "services"
     , contact = "contact"
@@ -52,9 +53,9 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
         ScrollToElement elementId ->
-            ( model, Task.attempt GetElement (getElement elementId) )
+            ( model, Task.attempt GotElement (getElement elementId) )
 
-        GetElement result ->
+        GotElement result ->
             case result of
                 Ok elem ->
                     ( model, toCmd (scrollAction elem.element.y) )
@@ -75,9 +76,41 @@ view { params } =
     }
 
 
-viewHeader : Html msg
+headerButton : String -> String -> Html Msg
+headerButton scrollToElemId buttonText =
+    button [ class "hover:text-blue-500 px-2 text-xl", onClick (ScrollToElement scrollToElemId) ]
+        [ text buttonText ]
+
+
+viewHeader : Html Msg
 viewHeader =
-    section [ id "header" ] []
+    section [ id elemId.header, class "relative h-screen flex flex-col" ]
+        [ img [ src "img/header.png", class "absolute inset-0 object-cover w-full", style "z-index" "-1" ] []
+        , div [ class "container mx-auto max-w-6xl flex justify-between items-center py-4" ]
+            [ div [ class "text-4xl flex items-center font-semibold" ]
+                [ img [ src "img/trevo.png", class "h-10 w-10 object-contain mr-2" ] []
+                , text "Ronilda Lima de Miranda"
+                ]
+            , div [ class "" ]
+                [ headerButton elemId.whoIs "Quem sou"
+                , headerButton elemId.about "Sobre a Guestalt"
+                , headerButton elemId.services "Meus Serviços"
+                , headerButton elemId.contact "Contato"
+                ]
+            ]
+        , div [ class "flex-1 container mx-auto max-w-6xl flex" ]
+            [ div [ class "max-w-2xl flex-1 pt-32" ]
+                [ p [ class "text-3xl font-semibold" ]
+                    [ text """
+                    "Quando alguém compreende como sinto e como sou, sem querer me analisar ou julgar, 
+                    então, nesse clima, posso desabrochar e crescer."
+                    """
+                    ]
+                , p [ class "text-right" ]
+                    [ text "Carl Rogers" ]
+                ]
+            ]
+        ]
 
 
 scrollAction : Float -> Ports.Request a

@@ -74,9 +74,10 @@ view { page, toMsg } model =
     , body =
         [ div [ class "layout" ]
             [ header [ class "fixed" ]
-                [ a [ class "link", href (Route.toString Route.Top) ] [ text "Homepage" ]
-                , a [ class "link", href (Route.toString Route.NotFound) ] [ text "Not found" ]
-                ]
+                -- Example of link
+                -- [ a [ class "link", href (Route.toString Route.Top) ] [ text "Homepage" ]
+                -- ]
+                []
             , div [ id elemId.viewportId, class "overflow-auto h-screen" ] page.body
             ]
         ]
