@@ -4,6 +4,7 @@ import Browser.Dom exposing (getElement)
 import Html exposing (..)
 import Html.Attributes exposing (attribute, class, height, id, src, style, tabindex, width)
 import Html.Events exposing (onClick)
+import Icons exposing (arrowRightIcon)
 import Ports exposing (scrollTo, toCmd)
 import Shared as Shared exposing (elemId)
 import Spa.Document exposing (Document)
@@ -17,12 +18,16 @@ type alias Params =
 
 
 type alias Model =
-    Url Params
+    { url : Url Params
+    , showCard1 : Bool
+    , showCard2 : Bool
+    }
 
 
 type Msg
     = ScrollToElement String
     | GotElement (Result Browser.Dom.Error Browser.Dom.Element)
+    | ToggleCard Int
 
 
 elemId =
@@ -46,7 +51,7 @@ page =
 
 init : Url Params -> ( Model, Cmd msg )
 init url =
-    ( url, Cmd.none )
+    ( { url = url, showCard1 = False, showCard2 = False }, Cmd.none )
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -64,11 +69,20 @@ update msg model =
                     Debug.log err
                         ( model, Cmd.none )
 
+        ToggleCard cardNum ->
+            if cardNum == 1 then
+                ( { model | showCard1 = not model.showCard1 }, Cmd.none )
+
+            else
+                ( { model | showCard2 = not model.showCard2 }, Cmd.none )
+
 
 imgUrls =
     { logo = "img/trevo.png"
     , bannerBackground = "img/header.png"
     , profile = "img/ronilda-v2.jpg"
+    , individualService = "img/user.png"
+    , coupleService = "img/users.png"
     }
 
 
@@ -76,10 +90,10 @@ imgUrls =
 -- VIEW
 
 
-view : Url Params -> Document Msg
-view { params } =
+view : Model -> Document Msg
+view model =
     { title = "Homepage"
-    , body = [ viewHeader, viewWhoIs, viewAbout, viewServices, viewContact ]
+    , body = [ viewHeader, viewWhoIs, viewAbout, viewServices model, viewContact ]
     }
 
 
@@ -197,38 +211,122 @@ viewAbout =
         ]
 
 
-viewServices : Html msg
-viewServices =
-    section [ id elemId.services ]
+viewServices : Model -> Html Msg
+viewServices model =
+    section [ id elemId.services, class "bg-gray-100" ]
         [ div [ class "container mx-auto max-w-2xl flex flex-col items-center py-4" ]
             [ div [ class "flex flex-col items-center mb-6" ]
-                [ h4 [ class "text-4xl font-semibold" ]
+                [ h4 [ class "text-4xl font-semibold mb-4 mt-2" ]
                     [ text "Meus "
                     , span [ class "text-blue-500 font-semibold" ] [ text "serviços" ]
+                    ]
+                , div [ class "flex flex-col md:flex-row items-stretch" ]
+                    [ serviceCard1 model.showCard1 1
+                    , serviceCard2 model.showCard2 2
                     ]
                 ]
             ]
         ]
 
 
+serviceCard1 : Bool -> Int -> Html Msg
+serviceCard1 isActive cardNum =
+    if not isActive then
+        cardView
+            [ img [ src imgUrls.individualService, class "h-30 w-30 object-contain mb-4" ] []
+            , h5 [ class "text-xl font-semibold mb-4" ] [ text "Terapia individual" ]
+            , p [ class "mb-4" ]
+                [ text """
+                Na terapia individual, ao mesmo tempo em que o terapeuta não 
+                abdica de sua autoridade, a emprega de modo que o cliente venha 
+                a ser a autoridade em sua própria vida."""
+                ]
+            , div [ class "flex-1 flex items-end" ]
+                [ button
+                    [ onClick (ToggleCard cardNum)
+                    , class "bg-yellow-500 hover:bg-yellow-600 text-white flex justify-center px-4 py-2"
+                    ]
+                    [ text "Ver mais" ]
+                ]
+            ]
 
--- section [ id elemId.services, class "h-screen" ]
---     [ div []
---         [ h5 [] [ text "Terapia individual" ]
---         , p [] [ text "Na terapia individual, ao mesmo tempo em que o terapeuta não abdica de sua autoridade, a emprega de modo que o cliente venha a ser a autoridade em sua própria vida." ]
---         ]
---     , div []
---         [ h5 [] [ text "Terapia de casal" ]
---         , p [] [ text "Segundo Cardella (2009), assim como a vida, pela qual somos responsáveis, uma relação necessita do cultivo de ambos os parceiros para durar e bem durar, mas seu destino transcende todas as tentativas de controlar e determinar os acontecimentos." ]
---         ]
---     , p []
---         [ text """
---             As palavras mais próximas para se traduzir a palavra alemã GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da Gestalt-terapia estão baseados no humanismo, existencialismo e na fenomenologia. É uma abordagem da Psicologia que valoriza a qualidade da relação da pessoa com o meio, investe no estreitamento do contato, na percepção das próprias reações diante de determinadas situações e na valorização da experiência. Se interessa muito mais pelo que o sujeito sente no “Aqui Agora”, se conscientizando de suas escolhas e seu modo de viver a fim de, pouco a pouco, ir ampliando sua percepção e atribuindo seus próprios significados.
---         """
---         ]
---     ]
+    else
+        cardView
+            [ p [] [ text """
+                Na terapia individual, o meu trabalho clínico é de facilitadora 
+                para que meu cliente se torne mais consciente de si mesmo, 
+                capaz de revelar-se na interação com seu meio e com o outro. 
+                Nessa caminhada, na sua busca pessoal, seja com sua dor psíquica, 
+                seja com a sua sede de autoconhecimento, o cliente possa sentir-se 
+                capaz de trilhar novas descobertas, ampliar as próprias habilidades, 
+                criar ou aprimorar o próprio estilo de ser e estar no mundo.
+                """ ]
+            , div [ class "flex-1 flex self-stretch items-end justify-end" ]
+                [ button
+                    [ onClick (ToggleCard cardNum)
+                    , class "text-gray-400 p-2"
+                    ]
+                    [ arrowRightIcon
+                    ]
+                ]
+            ]
 
 
+serviceCard2 : Bool -> Int -> Html Msg
+serviceCard2 isActive cardNum =
+    if not isActive then
+        cardView
+            [ img [ src imgUrls.coupleService, class "h-30 w-30 object-contain mb-4" ] []
+            , h5 [ class "text-xl font-semibold mb-4" ] [ text "Terapia de casal" ]
+            , p [ class "mb-4" ] [ text """
+                Segundo Cardella (2009), assim como a vida, pela qual 
+                somos responsáveis, uma relação necessita do cultivo 
+                de ambos os parceiros para durar e bem durar, 
+                mas seu destino transcende todas as tentativas de 
+                controlar e determinar os acontecimentos.
+                """ ]
+            , div [ class "flex-1 flex items-end" ]
+                [ button
+                    [ onClick (ToggleCard cardNum)
+                    , class "bg-green-300 hover:bg-green-400 text-white flex justify-center px-4 py-2"
+                    ]
+                    [ text "Ver mais" ]
+                ]
+            ]
+
+    else
+        cardView
+            [ p []
+                [ text """
+                As palavras mais próximas para se traduzir a palavra alemã 
+                GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da 
+                Gestalt-terapia estão baseados no humanismo, existencialismo e na 
+                fenomenologia. É uma abordagem da Psicologia que valoriza a 
+                qualidade da relação da pessoa com o meio, investe no estreitamento 
+                do contato, na percepção das próprias reações diante de determinadas 
+                situações e na valorização da experiência. Se interessa muito mais 
+                pelo que o sujeito sente no “Aqui Agora”, se conscientizando de 
+                suas escolhas e seu modo de viver a fim de, pouco a pouco, ir 
+                ampliando sua percepção e atribuindo seus próprios significados.
+                """
+                ]
+            , div [ class "flex-1 flex self-stretch items-end justify-end" ]
+                [ button
+                    [ onClick (ToggleCard cardNum)
+                    , class "text-gray-400 p-2"
+                    ]
+                    [ arrowRightIcon
+                    ]
+                ]
+            ]
+
+
+cardView : List (Html msg) -> Html msg
+cardView content =
+    div [ class "bg-white max-w-xs m-4 flex-1 flex flex-col items-center p-6" ] content
+
+
+googleMapsSource : String
 googleMapsSource =
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.1962574438803!2d-42.784652085258365!3d-5.071916196318767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x78e3a21ead3119d%3A0x2f7d99a34c99bfa8!2sCl%C3%ADnica%20PsicoCentro!5e0!3m2!1spt-BR!2sbr!4v1600825907916!5m2!1spt-BR!2sbr"
 
