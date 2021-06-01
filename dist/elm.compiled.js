@@ -5177,7 +5177,7 @@ var $author$project$Main$Shared = function (a) {
 	return {$: 2, a: a};
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
-var $author$project$Spa$Generated$Route$NotFound = 1;
+var $author$project$Spa$Generated$Route$Top = 0;
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
 		return {D: frag, b7: params, C: unvisited, y: value, G: visited};
@@ -5812,7 +5812,7 @@ var $elm$url$Url$Parser$parse = F2(
 					url.aT,
 					$elm$core$Basics$identity)));
 	});
-var $author$project$Spa$Generated$Route$Top = 0;
+var $author$project$Spa$Generated$Route$NotFound = 1;
 var $elm$url$Url$Parser$Parser = $elm$core$Basics$identity;
 var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
@@ -5923,7 +5923,7 @@ var $elm$core$Maybe$withDefault = F2(
 var $author$project$Main$fromUrl = A2(
 	$elm$core$Basics$composeR,
 	$author$project$Spa$Generated$Route$fromUrl,
-	$elm$core$Maybe$withDefault(1));
+	$elm$core$Maybe$withDefault(0));
 var $author$project$Shared$Model = F2(
 	function (url, key) {
 		return {bS: key, cm: url};
