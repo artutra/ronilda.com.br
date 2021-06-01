@@ -6295,7 +6295,8 @@ var $author$project$Pages$Top$viewContact = A2(
 	$elm$html$Html$section,
 	_List_fromArray(
 		[
-			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aq)
+			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aq),
+			$elm$html$Html$Attributes$class('bg-gray-300 text-gray-900')
 		]),
 	_List_fromArray(
 		[
@@ -6303,7 +6304,7 @@ var $author$project$Pages$Top$viewContact = A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('container mx-auto flex items-start py-4 flex')
+					$elm$html$Html$Attributes$class('container mx-auto max-w-4xl flex flex-col md:flex-row items-start p-4 flex')
 				]),
 			_List_fromArray(
 				[
@@ -6387,6 +6388,7 @@ var $author$project$Pages$Top$viewContact = A2(
 									$elm$html$Html$Attributes$width(400),
 									$elm$html$Html$Attributes$height(400),
 									$elm$html$Html$Attributes$tabindex(0),
+									A2($elm$html$Html$Attributes$style, 'width', '100%'),
 									A2($elm$html$Html$Attributes$style, 'border', '0'),
 									A2($elm$html$Html$Attributes$attribute, 'frameborder', '0'),
 									A2($elm$html$Html$Attributes$attribute, 'allowfullscreen', 'true'),
