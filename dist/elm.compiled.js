@@ -784,11 +784,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4)
 
 function _Debug_regionToString(region)
 {
-	if (region.ay.S === region.aI.S)
+	if (region.aE.S === region.aR.S)
 	{
-		return 'on line ' + region.ay.S;
+		return 'on line ' + region.aE.S;
 	}
-	return 'on lines ' + region.ay.S + ' through ' + region.aI.S;
+	return 'on lines ' + region.aE.S + ' through ' + region.aR.S;
 }
 
 
@@ -1857,9 +1857,9 @@ var _Platform_worker = F4(function(impl, flagDecoder, debugMetadata, args)
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bE,
-		impl.b9,
-		impl.b3,
+		impl.bQ,
+		impl.cl,
+		impl.cf,
 		function() { return function() {} }
 	);
 });
@@ -2705,8 +2705,8 @@ var _VirtualDom_mapEventRecord = F2(function(func, record)
 {
 	return {
 		A: func(record.A),
-		az: record.az,
-		av: record.av
+		aF: record.aF,
+		aA: record.aA
 	}
 });
 
@@ -2975,10 +2975,10 @@ function _VirtualDom_makeCallback(eventNode, initialHandler)
 
 		var value = result.a;
 		var message = !tag ? value : tag < 3 ? value.a : value.A;
-		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.az;
+		var stopPropagation = tag == 1 ? value.b : tag == 3 && value.aF;
 		var currentEventNode = (
 			stopPropagation && event.stopPropagation(),
-			(tag == 2 ? value.b : tag == 3 && value.av) && event.preventDefault(),
+			(tag == 2 ? value.b : tag == 3 && value.aA) && event.preventDefault(),
 			eventNode
 		);
 		var tagger;
@@ -3928,11 +3928,11 @@ var _Browser_element = _Debugger_element || F4(function(impl, flagDecoder, debug
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bE,
-		impl.b9,
-		impl.b3,
+		impl.bQ,
+		impl.cl,
+		impl.cf,
 		function(sendToApp, initialModel) {
-			var view = impl.cb;
+			var view = impl.cn;
 			/**/
 			var domNode = args['node'];
 			//*/
@@ -3964,12 +3964,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 	return _Platform_initialize(
 		flagDecoder,
 		args,
-		impl.bE,
-		impl.b9,
-		impl.b3,
+		impl.bQ,
+		impl.cl,
+		impl.cf,
 		function(sendToApp, initialModel) {
-			var divertHrefToApp = impl.ax && impl.ax(sendToApp)
-			var view = impl.cb;
+			var divertHrefToApp = impl.aD && impl.aD(sendToApp)
+			var view = impl.cn;
 			var title = _VirtualDom_doc.title;
 			var bodyNode = _VirtualDom_doc.body;
 			var currNode = _VirtualDom_virtualize(bodyNode);
@@ -3977,12 +3977,12 @@ var _Browser_document = _Debugger_document || F4(function(impl, flagDecoder, deb
 			{
 				_VirtualDom_divertHrefToApp = divertHrefToApp;
 				var doc = view(model);
-				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.bp);
+				var nextNode = _VirtualDom_node('body')(_List_Nil)(doc.bB);
 				var patches = _VirtualDom_diff(currNode, nextNode);
 				bodyNode = _VirtualDom_applyPatches(bodyNode, currNode, patches, sendToApp);
 				currNode = nextNode;
 				_VirtualDom_divertHrefToApp = 0;
-				(title !== doc.b6) && (_VirtualDom_doc.title = title = doc.b6);
+				(title !== doc.ci) && (_VirtualDom_doc.title = title = doc.ci);
 			});
 		}
 	);
@@ -4038,12 +4038,12 @@ function _Browser_makeAnimator(model, draw)
 
 function _Browser_application(impl)
 {
-	var onUrlChange = impl.bT;
-	var onUrlRequest = impl.bU;
+	var onUrlChange = impl.b3;
+	var onUrlRequest = impl.b4;
 	var key = function() { key.a(onUrlChange(_Browser_getUrl())); };
 
 	return _Browser_document({
-		ax: function(sendToApp)
+		aD: function(sendToApp)
 		{
 			key.a = sendToApp;
 			_Browser_window.addEventListener('popstate', key);
@@ -4059,9 +4059,9 @@ function _Browser_application(impl)
 					var next = $elm$url$Url$fromString(href).a;
 					sendToApp(onUrlRequest(
 						(next
-							&& curr.a0 === next.a0
-							&& curr.aO === next.aO
-							&& curr.aZ.a === next.aZ.a
+							&& curr.bc === next.bc
+							&& curr.aY === next.aY
+							&& curr.a8.a === next.a8.a
 						)
 							? $elm$browser$Browser$Internal(next)
 							: $elm$browser$Browser$External(href)
@@ -4069,13 +4069,13 @@ function _Browser_application(impl)
 				}
 			});
 		},
-		bE: function(flags)
+		bQ: function(flags)
 		{
-			return A3(impl.bE, flags, _Browser_getUrl(), key);
+			return A3(impl.bQ, flags, _Browser_getUrl(), key);
 		},
-		cb: impl.cb,
-		b9: impl.b9,
-		b3: impl.b3
+		cn: impl.cn,
+		cl: impl.cl,
+		cf: impl.cf
 	});
 }
 
@@ -4141,17 +4141,17 @@ var _Browser_decodeEvent = F2(function(decoder, event)
 function _Browser_visibilityInfo()
 {
 	return (typeof _VirtualDom_doc.hidden !== 'undefined')
-		? { bC: 'hidden', br: 'visibilitychange' }
+		? { bO: 'hidden', bD: 'visibilitychange' }
 		:
 	(typeof _VirtualDom_doc.mozHidden !== 'undefined')
-		? { bC: 'mozHidden', br: 'mozvisibilitychange' }
+		? { bO: 'mozHidden', bD: 'mozvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.msHidden !== 'undefined')
-		? { bC: 'msHidden', br: 'msvisibilitychange' }
+		? { bO: 'msHidden', bD: 'msvisibilitychange' }
 		:
 	(typeof _VirtualDom_doc.webkitHidden !== 'undefined')
-		? { bC: 'webkitHidden', br: 'webkitvisibilitychange' }
-		: { bC: 'hidden', br: 'visibilitychange' };
+		? { bO: 'webkitHidden', bD: 'webkitvisibilitychange' }
+		: { bO: 'hidden', bD: 'visibilitychange' };
 }
 
 
@@ -4232,12 +4232,12 @@ var _Browser_call = F2(function(functionName, id)
 function _Browser_getViewport()
 {
 	return {
-		a8: _Browser_getScene(),
-		bh: {
-			bj: _Browser_window.pageXOffset,
-			bk: _Browser_window.pageYOffset,
-			bi: _Browser_doc.documentElement.clientWidth,
-			aN: _Browser_doc.documentElement.clientHeight
+		bk: _Browser_getScene(),
+		bt: {
+			bw: _Browser_window.pageXOffset,
+			cp: _Browser_window.pageYOffset,
+			bv: _Browser_doc.documentElement.clientWidth,
+			aX: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4247,8 +4247,8 @@ function _Browser_getScene()
 	var body = _Browser_doc.body;
 	var elem = _Browser_doc.documentElement;
 	return {
-		bi: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		aN: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		bv: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
+		aX: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4271,15 +4271,15 @@ function _Browser_getViewportOf(id)
 	return _Browser_withNode(id, function(node)
 	{
 		return {
-			a8: {
-				bi: node.scrollWidth,
-				aN: node.scrollHeight
+			bk: {
+				bv: node.scrollWidth,
+				aX: node.scrollHeight
 			},
-			bh: {
-				bj: node.scrollLeft,
-				bk: node.scrollTop,
-				bi: node.clientWidth,
-				aN: node.clientHeight
+			bt: {
+				bw: node.scrollLeft,
+				cp: node.scrollTop,
+				bv: node.clientWidth,
+				aX: node.clientHeight
 			}
 		};
 	});
@@ -4309,18 +4309,18 @@ function _Browser_getElement(id)
 		var x = _Browser_window.pageXOffset;
 		var y = _Browser_window.pageYOffset;
 		return {
-			a8: _Browser_getScene(),
-			bh: {
-				bj: x,
-				bk: y,
-				bi: _Browser_doc.documentElement.clientWidth,
-				aN: _Browser_doc.documentElement.clientHeight
+			bk: _Browser_getScene(),
+			bt: {
+				bw: x,
+				cp: y,
+				bv: _Browser_doc.documentElement.clientWidth,
+				aX: _Browser_doc.documentElement.clientHeight
 			},
-			bv: {
-				bj: x + rect.left,
-				bk: y + rect.top,
-				bi: rect.width,
-				aN: rect.height
+			bH: {
+				bw: x + rect.left,
+				cp: y + rect.top,
+				bv: rect.width,
+				aX: rect.height
 			}
 		};
 	});
@@ -4882,7 +4882,7 @@ var $elm$url$Url$Http = 0;
 var $elm$url$Url$Https = 1;
 var $elm$url$Url$Url = F6(
 	function (protocol, host, port_, path, query, fragment) {
-		return {aK: fragment, aO: host, aX: path, aZ: port_, a0: protocol, aw: query};
+		return {aT: fragment, aY: host, a6: path, a8: port_, bc: protocol, aB: query};
 	});
 var $elm$core$String$contains = _String_contains;
 var $elm$core$String$length = _String_length;
@@ -5180,7 +5180,7 @@ var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $author$project$Spa$Generated$Route$NotFound = 1;
 var $elm$url$Url$Parser$State = F5(
 	function (visited, unvisited, params, frag, value) {
-		return {D: frag, bX: params, C: unvisited, y: value, G: visited};
+		return {D: frag, b7: params, C: unvisited, y: value, G: visited};
 	});
 var $elm$url$Url$Parser$getFirstMatch = function (states) {
 	getFirstMatch:
@@ -5807,9 +5807,9 @@ var $elm$url$Url$Parser$parse = F2(
 				A5(
 					$elm$url$Url$Parser$State,
 					_List_Nil,
-					$elm$url$Url$Parser$preparePath(url.aX),
-					$elm$url$Url$Parser$prepareQuery(url.aw),
-					url.aK,
+					$elm$url$Url$Parser$preparePath(url.a6),
+					$elm$url$Url$Parser$prepareQuery(url.aB),
+					url.aT,
 					$elm$core$Basics$identity)));
 	});
 var $author$project$Spa$Generated$Route$Top = 0;
@@ -5818,7 +5818,7 @@ var $elm$url$Url$Parser$mapState = F2(
 	function (func, _v0) {
 		var visited = _v0.G;
 		var unvisited = _v0.C;
-		var params = _v0.bX;
+		var params = _v0.b7;
 		var frag = _v0.D;
 		var value = _v0.y;
 		return A5(
@@ -5835,7 +5835,7 @@ var $elm$url$Url$Parser$map = F2(
 		return function (_v1) {
 			var visited = _v1.G;
 			var unvisited = _v1.C;
-			var params = _v1.bX;
+			var params = _v1.b7;
 			var frag = _v1.D;
 			var value = _v1.y;
 			return A2(
@@ -5876,7 +5876,7 @@ var $elm$url$Url$Parser$s = function (str) {
 	return function (_v0) {
 		var visited = _v0.G;
 		var unvisited = _v0.C;
-		var params = _v0.bX;
+		var params = _v0.b7;
 		var frag = _v0.D;
 		var value = _v0.y;
 		if (!unvisited.b) {
@@ -5926,7 +5926,7 @@ var $author$project$Main$fromUrl = A2(
 	$elm$core$Maybe$withDefault(1));
 var $author$project$Shared$Model = F2(
 	function (url, key) {
-		return {bG: key, ca: url};
+		return {bS: key, cm: url};
 	});
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $author$project$Shared$init = F3(
@@ -5958,62 +5958,93 @@ var $elm$core$Platform$Sub$batch = _Platform_batch;
 var $elm$core$Platform$Sub$none = $elm$core$Platform$Sub$batch(_List_Nil);
 var $author$project$Spa$Page$static = function (page) {
 	return {
-		bE: F2(
+		bQ: F2(
 			function (_v0, url) {
 				return _Utils_Tuple2(url, $elm$core$Platform$Cmd$none);
 			}),
-		ae: $elm$core$Basics$always(
+		ag: $elm$core$Basics$always(
 			A2($elm$core$Basics$composeR, $elm$core$Basics$identity, $author$project$Spa$Page$ignoreEffect)),
-		al: $elm$core$Basics$always($elm$core$Basics$identity),
-		b3: function (_v1) {
+		ao: $elm$core$Basics$always($elm$core$Basics$identity),
+		cf: function (_v1) {
 			return $elm$core$Platform$Sub$none;
 		},
-		b9: F2(
+		cl: F2(
 			function (_v2, model) {
 				return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
 			}),
-		cb: page.cb
+		cn: page.cn
 	};
 };
 var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
 var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $author$project$Pages$NotFound$view = function (_v0) {
-	var params = _v0.bX;
+	var params = _v0.b7;
 	return {
-		bp: _List_fromArray(
+		bB: _List_fromArray(
 			[
 				$elm$html$Html$text('Not found')
 			]),
-		b6: '404'
+		ci: '404'
 	};
 };
 var $author$project$Pages$NotFound$page = $author$project$Spa$Page$static(
-	{cb: $author$project$Pages$NotFound$view});
+	{cn: $author$project$Pages$NotFound$view});
 var $author$project$Spa$Page$element = function (page) {
 	return {
-		bE: F2(
+		bQ: F2(
 			function (_v0, params) {
-				return page.bE(params);
+				return page.bQ(params);
 			}),
-		ae: $elm$core$Basics$always(
+		ag: $elm$core$Basics$always(
 			A2($elm$core$Basics$composeR, $elm$core$Basics$identity, $author$project$Spa$Page$ignoreEffect)),
-		al: $elm$core$Basics$always($elm$core$Basics$identity),
-		b3: page.b3,
-		b9: F2(
+		ao: $elm$core$Basics$always($elm$core$Basics$identity),
+		cf: page.cf,
+		cl: F2(
 			function (msg, model) {
-				return A2(page.b9, msg, model);
+				return A2(page.cl, msg, model);
 			}),
-		cb: page.cb
+		cn: page.cn
 	};
 };
 var $author$project$Pages$Top$init = function (url) {
-	return _Utils_Tuple2(url, $elm$core$Platform$Cmd$none);
+	return _Utils_Tuple2(
+		{V: false, W: false, cm: url},
+		$elm$core$Platform$Cmd$none);
 };
+var $author$project$Pages$Top$GotElement = function (a) {
+	return {$: 1, a: a};
+};
+var $elm$core$Basics$composeL = F3(
+	function (g, f, x) {
+		return g(
+			f(x));
+	});
+var $elm$core$Task$onError = _Scheduler_onError;
+var $elm$core$Task$attempt = F2(
+	function (resultToMessage, task) {
+		return $elm$core$Task$command(
+			A2(
+				$elm$core$Task$onError,
+				A2(
+					$elm$core$Basics$composeL,
+					A2($elm$core$Basics$composeL, $elm$core$Task$succeed, resultToMessage),
+					$elm$core$Result$Err),
+				A2(
+					$elm$core$Task$andThen,
+					A2(
+						$elm$core$Basics$composeL,
+						A2($elm$core$Basics$composeL, $elm$core$Task$succeed, resultToMessage),
+						$elm$core$Result$Ok),
+					task)));
+	});
+var $elm$browser$Browser$Dom$getElement = _Browser_getElement;
+var $elm$core$Basics$not = _Basics_not;
+var $author$project$Shared$elemId = {bu: 'page'};
 var $elm$json$Json$Encode$float = _Json_wrap;
 var $author$project$Ports$Request = $elm$core$Basics$identity;
 var $author$project$Ports$noResponse = F2(
 	function (id, data) {
-		return {an: data, aP: id, a5: $elm$core$Maybe$Nothing};
+		return {as: data, aZ: id, bh: $elm$core$Maybe$Nothing};
 	});
 var $elm$json$Json$Encode$object = function (pairs) {
 	return _Json_wrap(
@@ -6038,7 +6069,7 @@ var $author$project$Ports$scrollTo = function (config) {
 				[
 					_Utils_Tuple2(
 					'id',
-					$elm$json$Json$Encode$string(config.cc)),
+					$elm$json$Json$Encode$string(config.bu)),
 					_Utils_Tuple2(
 					'config',
 					$elm$json$Json$Encode$object(
@@ -6046,19 +6077,21 @@ var $author$project$Ports$scrollTo = function (config) {
 							[
 								_Utils_Tuple2(
 								'top',
-								$elm$json$Json$Encode$float(config.b8)),
+								$elm$json$Json$Encode$float(config.ck)),
 								_Utils_Tuple2(
 								'left',
-								$elm$json$Json$Encode$float(config.bH)),
+								$elm$json$Json$Encode$float(config.bT)),
 								_Utils_Tuple2(
 								'behavior',
 								$elm$json$Json$Encode$string(
-									config.bF ? 'smooth' : 'auto'))
+									config.bR ? 'smooth' : 'auto'))
 							])))
 				])));
 };
-var $author$project$Pages$Top$scrollAction = $author$project$Ports$scrollTo(
-	{bF: true, bH: 0, b8: 100, cc: 'page'});
+var $author$project$Pages$Top$scrollAction = function (top) {
+	return $author$project$Ports$scrollTo(
+		{bR: true, bT: 0, ck: top, bu: $author$project$Shared$elemId.bu});
+};
 var $elm$core$Maybe$map = F2(
 	function (f, maybe) {
 		if (!maybe.$) {
@@ -6079,8 +6112,8 @@ var $author$project$Ports$toCmd = function (_v0) {
 				[
 					_Utils_Tuple2(
 					'id',
-					$elm$json$Json$Encode$string(req.aP)),
-					_Utils_Tuple2('data', req.an),
+					$elm$json$Json$Encode$string(req.aZ)),
+					_Utils_Tuple2('data', req.as),
 					_Utils_Tuple2(
 					'response',
 					A2(
@@ -6092,19 +6125,47 @@ var $author$project$Ports$toCmd = function (_v0) {
 								return $elm$json$Json$Encode$object(
 									_List_fromArray(
 										[
-											_Utils_Tuple2('data', res.an)
+											_Utils_Tuple2('data', res.as)
 										]));
 							},
-							req.a5)))
+							req.bh)))
 				])));
 };
 var $author$project$Pages$Top$update = F2(
 	function (msg, model) {
-		return _Utils_Tuple2(
-			model,
-			$author$project$Ports$toCmd($author$project$Pages$Top$scrollAction));
+		switch (msg.$) {
+			case 0:
+				var elementId = msg.a;
+				return _Utils_Tuple2(
+					model,
+					A2(
+						$elm$core$Task$attempt,
+						$author$project$Pages$Top$GotElement,
+						$elm$browser$Browser$Dom$getElement(elementId)));
+			case 1:
+				var result = msg.a;
+				if (!result.$) {
+					var elem = result.a;
+					return _Utils_Tuple2(
+						model,
+						$author$project$Ports$toCmd(
+							$author$project$Pages$Top$scrollAction(elem.bH.cp)));
+				} else {
+					return _Utils_Tuple2(model, $elm$core$Platform$Cmd$none);
+				}
+			default:
+				var cardNum = msg.a;
+				return (cardNum === 1) ? _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{V: !model.V}),
+					$elm$core$Platform$Cmd$none) : _Utils_Tuple2(
+					_Utils_update(
+						model,
+						{W: !model.W}),
+					$elm$core$Platform$Cmd$none);
+		}
 	});
-var $elm$html$Html$h5 = _VirtualDom_node('h5');
 var $elm$html$Html$Attributes$stringProperty = F2(
 	function (key, string) {
 		return A2(
@@ -6112,134 +6173,232 @@ var $elm$html$Html$Attributes$stringProperty = F2(
 			key,
 			$elm$json$Json$Encode$string(string));
 	});
+var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
+var $elm$html$Html$div = _VirtualDom_node('div');
+var $author$project$Pages$Top$elemId = {ap: 'about', aq: 'contact', aW: 'header', aC: 'services', aI: 'who-is'};
+var $elm$html$Html$h4 = _VirtualDom_node('h4');
 var $elm$html$Html$Attributes$id = $elm$html$Html$Attributes$stringProperty('id');
 var $elm$html$Html$p = _VirtualDom_node('p');
 var $elm$html$Html$section = _VirtualDom_node('section');
+var $elm$html$Html$span = _VirtualDom_node('span');
 var $author$project$Pages$Top$viewAbout = A2(
 	$elm$html$Html$section,
 	_List_fromArray(
 		[
-			$elm$html$Html$Attributes$id('about')
+			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.ap)
 		]),
 	_List_fromArray(
 		[
 			A2(
-			$elm$html$Html$h5,
-			_List_Nil,
+			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('Sobre a Guestalt')
-				])),
-			A2(
-			$elm$html$Html$p,
-			_List_Nil,
+					$elm$html$Html$Attributes$class('container mx-auto max-w-2xl flex flex-col items-center py-4')
+				]),
 			_List_fromArray(
 				[
-					$elm$html$Html$text('\n                As palavras mais próximas para se traduzir a palavra alemã GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da Gestalt-terapia estão baseados no humanismo, existencialismo e na fenomenologia. É uma abordagem da Psicologia que valoriza a qualidade da relação da pessoa com o meio, investe no estreitamento do contato, na percepção das próprias reações diante de determinadas situações e na valorização da experiência. Se interessa muito mais pelo que o sujeito sente no “Aqui Agora”, se conscientizando de suas escolhas e seu modo de viver a fim de, pouco a pouco, ir ampliando sua percepção e atribuindo seus próprios significados.\n            ')
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex flex-col items-center mb-6')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$h4,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('text-4xl font-semibold')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Sobre a '),
+									A2(
+									$elm$html$Html$span,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('text-yellow-500 font-semibold')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Guestalt')
+										]))
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('flex-1')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('\r\n                            As palavras mais próximas para se traduzir a palavra alemã GESTALT \r\n                            são “forma” ou “configuração”. \r\n                            Os pressupostos teóricos da Gestalt-terapia estão baseados no humanismo, \r\n                            existencialismo e na fenomenologia. \r\n                            É uma abordagem da Psicologia que valoriza a qualidade da relação da \r\n                            pessoa com o meio, investe no estreitamento do contato, na percepção \r\n                            das próprias reações diante de determinadas situações e na valorização \r\n                            da experiência. Se interessa muito mais pelo que o sujeito sente no \r\n                            “Aqui Agora”, se conscientizando de suas escolhas e seu modo de \r\n                            viver a fim de, pouco a pouco, ir ampliando sua percepção e \r\n                            atribuindo seus próprios significados.\r\n                        ')
+										]))
+								]))
+						]))
 				]))
 		]));
+var $elm$virtual_dom$VirtualDom$attribute = F2(
+	function (key, value) {
+		return A2(
+			_VirtualDom_attribute,
+			_VirtualDom_noOnOrFormAction(key),
+			_VirtualDom_noJavaScriptOrHtmlUri(value));
+	});
+var $elm$html$Html$Attributes$attribute = $elm$virtual_dom$VirtualDom$attribute;
+var $author$project$Pages$Top$googleMapsSource = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3974.1962574438803!2d-42.784652085258365!3d-5.071916196318767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x78e3a21ead3119d%3A0x2f7d99a34c99bfa8!2sCl%C3%ADnica%20PsicoCentro!5e0!3m2!1spt-BR!2sbr!4v1600825907916!5m2!1spt-BR!2sbr';
+var $elm$html$Html$Attributes$height = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'height',
+		$elm$core$String$fromInt(n));
+};
+var $elm$html$Html$iframe = _VirtualDom_node('iframe');
+var $elm$html$Html$img = _VirtualDom_node('img');
+var $author$project$Pages$Top$imgUrls = {aL: 'img/header.png', aO: 'img/users.png', a_: 'img/user.png', ah: 'img/trevo.png', bb: 'img/ronilda-v2.jpg'};
+var $elm$html$Html$Attributes$src = function (url) {
+	return A2(
+		$elm$html$Html$Attributes$stringProperty,
+		'src',
+		_VirtualDom_noJavaScriptOrHtmlUri(url));
+};
+var $elm$virtual_dom$VirtualDom$style = _VirtualDom_style;
+var $elm$html$Html$Attributes$style = $elm$virtual_dom$VirtualDom$style;
+var $elm$html$Html$Attributes$tabindex = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'tabIndex',
+		$elm$core$String$fromInt(n));
+};
+var $elm$html$Html$Attributes$width = function (n) {
+	return A2(
+		_VirtualDom_attribute,
+		'width',
+		$elm$core$String$fromInt(n));
+};
 var $author$project$Pages$Top$viewContact = A2(
 	$elm$html$Html$section,
 	_List_fromArray(
 		[
-			$elm$html$Html$Attributes$id('contact')
-		]),
-	_List_fromArray(
-		[
-			A2(
-			$elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Clínica Psicocentro e atendimento online')
-				])),
-			A2(
-			$elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('Av Homero Castelo Branco, 1418')
-				])),
-			A2(
-			$elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('São Cristóvão, Teresina - PI')
-				])),
-			A2(
-			$elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('(86) 3233-9553 / (86) 98823-9553')
-				]))
-		]));
-var $author$project$Pages$Top$viewHeader = A2(
-	$elm$html$Html$section,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$id('header')
-		]),
-	_List_Nil);
-var $elm$html$Html$div = _VirtualDom_node('div');
-var $author$project$Pages$Top$viewServices = A2(
-	$elm$html$Html$section,
-	_List_fromArray(
-		[
-			$elm$html$Html$Attributes$id('services')
+			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aq)
 		]),
 	_List_fromArray(
 		[
 			A2(
 			$elm$html$Html$div,
-			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('container mx-auto flex items-start py-4 flex')
+				]),
 			_List_fromArray(
 				[
 					A2(
-					$elm$html$Html$h5,
-					_List_Nil,
+					$elm$html$Html$div,
 					_List_fromArray(
 						[
-							$elm$html$Html$text('Terapia individual')
+							$elm$html$Html$Attributes$class('flex-1 flex flex-col items-start justify-start')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('flex-1 flex items-center')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$img,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.ah),
+											$elm$html$Html$Attributes$class('h-10 w-10 object-contain mr-2')
+										]),
+									_List_Nil),
+									A2(
+									$elm$html$Html$p,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('text-2xl font-semibold')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('Ronilda Lima de Miranda')
+										]))
+								])),
+							A2(
+							$elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Clínica Psicocentro e atendimento online')
+								])),
+							A2(
+							$elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Av Homero Castelo Branco, 1418')
+								])),
+							A2(
+							$elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text('São Cristóvão, Teresina - PI')
+								])),
+							A2(
+							$elm$html$Html$p,
+							_List_Nil,
+							_List_fromArray(
+								[
+									$elm$html$Html$text('(86) 3233-9553 / (86) 98823-9553')
+								]))
 						])),
 					A2(
-					$elm$html$Html$p,
-					_List_Nil,
+					$elm$html$Html$div,
 					_List_fromArray(
 						[
-							$elm$html$Html$text('Na terapia individual, ao mesmo tempo em que o terapeuta não abdica de sua autoridade, a emprega de modo que o cliente venha a ser a autoridade em sua própria vida.')
+							$elm$html$Html$Attributes$class('flex-1')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$iframe,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src($author$project$Pages$Top$googleMapsSource),
+									$elm$html$Html$Attributes$width(400),
+									$elm$html$Html$Attributes$height(400),
+									$elm$html$Html$Attributes$tabindex(0),
+									A2($elm$html$Html$Attributes$style, 'border', '0'),
+									A2($elm$html$Html$Attributes$attribute, 'frameborder', '0'),
+									A2($elm$html$Html$Attributes$attribute, 'allowfullscreen', 'true'),
+									A2($elm$html$Html$Attributes$attribute, 'aria-hidden', 'false')
+								]),
+							_List_Nil)
 						]))
-				])),
-			A2(
-			$elm$html$Html$div,
-			_List_Nil,
-			_List_fromArray(
-				[
-					A2(
-					$elm$html$Html$h5,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Terapia de casal')
-						])),
-					A2(
-					$elm$html$Html$p,
-					_List_Nil,
-					_List_fromArray(
-						[
-							$elm$html$Html$text('Segundo Cardella (2009), assim como a vida, pela qual somos responsáveis, uma relação necessita do cultivo de ambos os parceiros para durar e bem durar, mas seu destino transcende todas as tentativas de controlar e determinar os acontecimentos.')
-						]))
-				])),
-			A2(
-			$elm$html$Html$p,
-			_List_Nil,
-			_List_fromArray(
-				[
-					$elm$html$Html$text('\n                As palavras mais próximas para se traduzir a palavra alemã GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da Gestalt-terapia estão baseados no humanismo, existencialismo e na fenomenologia. É uma abordagem da Psicologia que valoriza a qualidade da relação da pessoa com o meio, investe no estreitamento do contato, na percepção das próprias reações diante de determinadas situações e na valorização da experiência. Se interessa muito mais pelo que o sujeito sente no “Aqui Agora”, se conscientizando de suas escolhas e seu modo de viver a fim de, pouco a pouco, ir ampliando sua percepção e atribuindo seus próprios significados.\n            ')
 				]))
 		]));
-var $author$project$Pages$Top$Clicked = 0;
+var $author$project$Pages$Top$ScrollToElement = function (a) {
+	return {$: 0, a: a};
+};
 var $elm$html$Html$button = _VirtualDom_node('button');
 var $elm$virtual_dom$VirtualDom$Normal = function (a) {
 	return {$: 0, a: a};
@@ -6258,48 +6417,523 @@ var $elm$html$Html$Events$onClick = function (msg) {
 		'click',
 		$elm$json$Json$Decode$succeed(msg));
 };
-var $author$project$Pages$Top$viewWhoIs = A2(
+var $author$project$Pages$Top$headerButton = F2(
+	function (scrollToElemId, buttonText) {
+		return A2(
+			$elm$html$Html$button,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('hover:text-blue-500 px-2 text-xl'),
+					$elm$html$Html$Events$onClick(
+					$author$project$Pages$Top$ScrollToElement(scrollToElemId))
+				]),
+			_List_fromArray(
+				[
+					$elm$html$Html$text(buttonText)
+				]));
+	});
+var $author$project$Pages$Top$viewHeader = A2(
 	$elm$html$Html$section,
 	_List_fromArray(
 		[
-			$elm$html$Html$Attributes$id('who-is')
+			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aW),
+			$elm$html$Html$Attributes$class('relative h-screen flex flex-col')
 		]),
 	_List_fromArray(
 		[
 			A2(
-			$elm$html$Html$p,
-			_List_Nil,
+			$elm$html$Html$img,
 			_List_fromArray(
 				[
-					$elm$html$Html$text('\n                Psicóloga, Gestalt-terapeuta pelo Instituto Gestalt do Ceará, \n                graduada em Psicologia pelo Centro Universitário Santo Agostinho (Teresina-PI) \n                e graduada em Comunicação Social pela Universidade Federal do Maranhão. \n                A Gestalt-terapia é a minha principal linha de atuação com foco no atendimento de adultos e \n                casais.\n            '),
+					$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.aL),
+					$elm$html$Html$Attributes$class('absolute inset-0 object-cover w-full'),
+					A2($elm$html$Html$Attributes$style, 'z-index', '-1')
+				]),
+			_List_Nil),
+			A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('container mx-auto max-w-6xl flex justify-between items-center py-4')
+				]),
+			_List_fromArray(
+				[
 					A2(
-					$elm$html$Html$button,
+					$elm$html$Html$div,
 					_List_fromArray(
 						[
-							$elm$html$Html$Events$onClick(0)
+							$elm$html$Html$Attributes$class('text-4xl flex items-center font-semibold')
 						]),
 					_List_fromArray(
 						[
-							$elm$html$Html$text('aperte')
+							A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.ah),
+									$elm$html$Html$Attributes$class('h-10 w-10 object-contain mr-2')
+								]),
+							_List_Nil),
+							$elm$html$Html$text('Ronilda Lima de Miranda')
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('')
+						]),
+					_List_fromArray(
+						[
+							A2($author$project$Pages$Top$headerButton, $author$project$Pages$Top$elemId.aI, 'Quem sou'),
+							A2($author$project$Pages$Top$headerButton, $author$project$Pages$Top$elemId.ap, 'Sobre a Guestalt'),
+							A2($author$project$Pages$Top$headerButton, $author$project$Pages$Top$elemId.aC, 'Meus Serviços'),
+							A2($author$project$Pages$Top$headerButton, $author$project$Pages$Top$elemId.aq, 'Contato')
+						]))
+				])),
+			A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('flex-1 container mx-auto max-w-6xl flex')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('max-w-2xl flex-1 pt-32')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$p,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('text-3xl font-semibold')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('\r\n                    "Quando alguém compreende como sinto e como sou, sem querer me analisar ou julgar, \r\n                    então, nesse clima, posso desabrochar e crescer."\r\n                    ')
+								])),
+							A2(
+							$elm$html$Html$p,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('text-right')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Carl Rogers')
+								]))
 						]))
 				]))
 		]));
-var $author$project$Pages$Top$view = function (_v0) {
-	var params = _v0.bX;
+var $author$project$Pages$Top$ToggleCard = function (a) {
+	return {$: 2, a: a};
+};
+var $elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
+var $elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
+var $elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
+var $elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
+var $elm$svg$Svg$path = $elm$svg$Svg$trustedNode('path');
+var $elm$svg$Svg$svg = $elm$svg$Svg$trustedNode('svg');
+var $elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var $elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
+var $author$project$Icons$arrowRightIcon = A2(
+	$elm$svg$Svg$svg,
+	_List_fromArray(
+		[
+			$elm$svg$Svg$Attributes$viewBox('0 0 444.819 444.819'),
+			$elm$svg$Svg$Attributes$width('30px'),
+			$elm$svg$Svg$Attributes$height('30px'),
+			$elm$svg$Svg$Attributes$class('fill-current')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$svg$Svg$path,
+			_List_fromArray(
+				[
+					$elm$svg$Svg$Attributes$d('M352.025,196.712L165.884,10.848C159.029,3.615,150.469,0,140.187,0c-10.282,0-18.842,3.619-25.697,10.848L92.792,32.264 c-7.044,7.043-10.566,15.604-10.566,25.692c0,9.897,3.521,18.56,10.566,25.981l138.753,138.473L92.786,361.168 c-7.042,7.043-10.564,15.604-10.564,25.693c0,9.896,3.521,18.562,10.564,25.98l21.7,21.413 c7.043,7.043,15.612,10.564,25.697,10.564c10.089,0,18.656-3.521,25.697-10.564l186.145-185.864 c7.046-7.423,10.571-16.084,10.571-25.981C362.597,212.321,359.071,203.755,352.025,196.712z')
+				]),
+			_List_Nil)
+		]));
+var $author$project$Pages$Top$cardView = function (content) {
+	return A2(
+		$elm$html$Html$div,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$class('bg-white max-w-xs m-4 flex-1 flex flex-col items-center p-6')
+			]),
+		content);
+};
+var $elm$html$Html$h5 = _VirtualDom_node('h5');
+var $author$project$Pages$Top$serviceCard1 = F2(
+	function (isActive, cardNum) {
+		return (!isActive) ? $author$project$Pages$Top$cardView(
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$img,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.a_),
+							$elm$html$Html$Attributes$class('h-30 w-30 object-contain mb-4')
+						]),
+					_List_Nil),
+					A2(
+					$elm$html$Html$h5,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('text-xl font-semibold mb-4')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Terapia individual')
+						])),
+					A2(
+					$elm$html$Html$p,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('mb-4')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('\r\n                Na terapia individual, ao mesmo tempo em que o terapeuta não \r\n                abdica de sua autoridade, a emprega de modo que o cliente venha \r\n                a ser a autoridade em sua própria vida.')
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex-1 flex items-end')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick(
+									$author$project$Pages$Top$ToggleCard(cardNum)),
+									$elm$html$Html$Attributes$class('bg-yellow-500 hover:bg-yellow-600 text-white flex justify-center px-4 py-2')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Ver mais')
+								]))
+						]))
+				])) : $author$project$Pages$Top$cardView(
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$p,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text('\r\n                Na terapia individual, o meu trabalho clínico é de facilitadora \r\n                para que meu cliente se torne mais consciente de si mesmo, \r\n                capaz de revelar-se na interação com seu meio e com o outro. \r\n                Nessa caminhada, na sua busca pessoal, seja com sua dor psíquica, \r\n                seja com a sua sede de autoconhecimento, o cliente possa sentir-se \r\n                capaz de trilhar novas descobertas, ampliar as próprias habilidades, \r\n                criar ou aprimorar o próprio estilo de ser e estar no mundo.\r\n                ')
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex-1 flex self-stretch items-end justify-end')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick(
+									$author$project$Pages$Top$ToggleCard(cardNum)),
+									$elm$html$Html$Attributes$class('text-gray-400 p-2')
+								]),
+							_List_fromArray(
+								[$author$project$Icons$arrowRightIcon]))
+						]))
+				]));
+	});
+var $author$project$Pages$Top$serviceCard2 = F2(
+	function (isActive, cardNum) {
+		return (!isActive) ? $author$project$Pages$Top$cardView(
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$img,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.aO),
+							$elm$html$Html$Attributes$class('h-30 w-30 object-contain mb-4')
+						]),
+					_List_Nil),
+					A2(
+					$elm$html$Html$h5,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('text-xl font-semibold mb-4')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('Terapia de casal')
+						])),
+					A2(
+					$elm$html$Html$p,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('mb-4')
+						]),
+					_List_fromArray(
+						[
+							$elm$html$Html$text('\r\n                Segundo Cardella (2009), assim como a vida, pela qual \r\n                somos responsáveis, uma relação necessita do cultivo \r\n                de ambos os parceiros para durar e bem durar, \r\n                mas seu destino transcende todas as tentativas de \r\n                controlar e determinar os acontecimentos.\r\n                ')
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex-1 flex items-end')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick(
+									$author$project$Pages$Top$ToggleCard(cardNum)),
+									$elm$html$Html$Attributes$class('bg-green-300 hover:bg-green-400 text-white flex justify-center px-4 py-2')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Ver mais')
+								]))
+						]))
+				])) : $author$project$Pages$Top$cardView(
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$p,
+					_List_Nil,
+					_List_fromArray(
+						[
+							$elm$html$Html$text('\r\n                As palavras mais próximas para se traduzir a palavra alemã \r\n                GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da \r\n                Gestalt-terapia estão baseados no humanismo, existencialismo e na \r\n                fenomenologia. É uma abordagem da Psicologia que valoriza a \r\n                qualidade da relação da pessoa com o meio, investe no estreitamento \r\n                do contato, na percepção das próprias reações diante de determinadas \r\n                situações e na valorização da experiência. Se interessa muito mais \r\n                pelo que o sujeito sente no “Aqui Agora”, se conscientizando de \r\n                suas escolhas e seu modo de viver a fim de, pouco a pouco, ir \r\n                ampliando sua percepção e atribuindo seus próprios significados.\r\n                ')
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex-1 flex self-stretch items-end justify-end')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$button,
+							_List_fromArray(
+								[
+									$elm$html$Html$Events$onClick(
+									$author$project$Pages$Top$ToggleCard(cardNum)),
+									$elm$html$Html$Attributes$class('text-gray-400 p-2')
+								]),
+							_List_fromArray(
+								[$author$project$Icons$arrowRightIcon]))
+						]))
+				]));
+	});
+var $author$project$Pages$Top$viewServices = function (model) {
+	return A2(
+		$elm$html$Html$section,
+		_List_fromArray(
+			[
+				$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aC),
+				$elm$html$Html$Attributes$class('bg-gray-100')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				$elm$html$Html$div,
+				_List_fromArray(
+					[
+						$elm$html$Html$Attributes$class('container mx-auto max-w-2xl flex flex-col items-center py-4')
+					]),
+				_List_fromArray(
+					[
+						A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('flex flex-col items-center mb-6')
+							]),
+						_List_fromArray(
+							[
+								A2(
+								$elm$html$Html$h4,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('text-4xl font-semibold mb-4 mt-2')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('Meus '),
+										A2(
+										$elm$html$Html$span,
+										_List_fromArray(
+											[
+												$elm$html$Html$Attributes$class('text-blue-500 font-semibold')
+											]),
+										_List_fromArray(
+											[
+												$elm$html$Html$text('serviços')
+											]))
+									])),
+								A2(
+								$elm$html$Html$div,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('flex flex-col md:flex-row items-stretch')
+									]),
+								_List_fromArray(
+									[
+										A2($author$project$Pages$Top$serviceCard1, model.V, 1),
+										A2($author$project$Pages$Top$serviceCard2, model.W, 2)
+									]))
+							]))
+					]))
+			]));
+};
+var $elm$html$Html$br = _VirtualDom_node('br');
+var $author$project$Pages$Top$viewWhoIs = A2(
+	$elm$html$Html$section,
+	_List_fromArray(
+		[
+			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aI)
+		]),
+	_List_fromArray(
+		[
+			A2(
+			$elm$html$Html$div,
+			_List_fromArray(
+				[
+					$elm$html$Html$Attributes$class('container mx-auto max-w-2xl flex flex-col items-center py-4')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex flex-col items-center mb-6')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$img,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.ah),
+									$elm$html$Html$Attributes$class('h-10 w-16 object-contain')
+								]),
+							_List_Nil),
+							A2(
+							$elm$html$Html$h4,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('text-4xl font-semibold')
+								]),
+							_List_fromArray(
+								[
+									$elm$html$Html$text('Quem sou '),
+									A2(
+									$elm$html$Html$span,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('text-green-300 font-semibold')
+										]),
+									_List_fromArray(
+										[
+											$elm$html$Html$text('eu')
+										]))
+								]))
+						])),
+					A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('flex flex-col md:flex-row items-center')
+						]),
+					_List_fromArray(
+						[
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('relative p-6 mb-6 md:mr-6')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$img,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$src($author$project$Pages$Top$imgUrls.bb),
+											$elm$html$Html$Attributes$class('flex-1 w-48 object-contain relative')
+										]),
+									_List_Nil),
+									A2(
+									$elm$html$Html$div,
+									_List_fromArray(
+										[
+											$elm$html$Html$Attributes$class('absolute top-0 left-10 right-0 bottom-0 border-4 border-red-500')
+										]),
+									_List_Nil)
+								])),
+							A2(
+							$elm$html$Html$div,
+							_List_fromArray(
+								[
+									$elm$html$Html$Attributes$class('flex-1')
+								]),
+							_List_fromArray(
+								[
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('\r\n                            Psicóloga, Gestalt-terapeuta pelo Instituto Gestalt do Ceará, \r\n                            graduada em Psicologia pelo Centro Universitário Santo Agostinho (Teresina-PI) \r\n                            e graduada em Comunicação Social pela Universidade Federal do Maranhão. \r\n                        ')
+										])),
+									A2($elm$html$Html$br, _List_Nil, _List_Nil),
+									A2(
+									$elm$html$Html$p,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('\r\n                            A Gestalt-terapia é a minha principal linha de atuação com foco no atendimento de adultos e \r\n                            casais.\r\n                        ')
+										]))
+								]))
+						]))
+				]))
+		]));
+var $author$project$Pages$Top$view = function (model) {
 	return {
-		bp: _List_fromArray(
-			[$author$project$Pages$Top$viewHeader, $author$project$Pages$Top$viewWhoIs, $author$project$Pages$Top$viewAbout, $author$project$Pages$Top$viewServices, $author$project$Pages$Top$viewContact]),
-		b6: 'Homepage'
+		bB: _List_fromArray(
+			[
+				$author$project$Pages$Top$viewHeader,
+				$author$project$Pages$Top$viewWhoIs,
+				$author$project$Pages$Top$viewAbout,
+				$author$project$Pages$Top$viewServices(model),
+				$author$project$Pages$Top$viewContact
+			]),
+		ci: 'Homepage'
 	};
 };
 var $author$project$Pages$Top$page = $author$project$Spa$Page$element(
 	{
-		bE: $author$project$Pages$Top$init,
-		b3: function (_v0) {
+		bQ: $author$project$Pages$Top$init,
+		cf: function (_v0) {
 			return $elm$core$Platform$Sub$none;
 		},
-		b9: $author$project$Pages$Top$update,
-		cb: $author$project$Pages$Top$view
+		cl: $author$project$Pages$Top$update,
+		cn: $author$project$Pages$Top$view
 	});
 var $elm$core$List$drop = F2(
 	function (n, list) {
@@ -6406,13 +7040,13 @@ var $author$project$Spa$Url$toQueryDict = function (queryString) {
 var $author$project$Spa$Url$create = F3(
 	function (params, key, url) {
 		return {
-			bG: key,
-			bX: params,
-			aw: A2(
+			bS: key,
+			b7: params,
+			aB: A2(
 				$elm$core$Maybe$withDefault,
 				$elm$core$Dict$empty,
-				A2($elm$core$Maybe$map, $author$project$Spa$Url$toQueryDict, url.aw)),
-			a1: url
+				A2($elm$core$Maybe$map, $author$project$Spa$Url$toQueryDict, url.aB)),
+			bd: url
 		};
 	});
 var $elm$core$Platform$Cmd$map = _Platform_map;
@@ -6422,11 +7056,11 @@ var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
 var $author$project$Spa$Document$map = F2(
 	function (fn, doc) {
 		return {
-			bp: A2(
+			bB: A2(
 				$elm$core$List$map,
 				$elm$html$Html$map(fn),
-				doc.bp),
-			b6: doc.b6
+				doc.bB),
+			ci: doc.ci
 		};
 	});
 var $author$project$Spa$Generated$Pages$upgrade = F3(
@@ -6437,7 +7071,7 @@ var $author$project$Spa$Generated$Pages$upgrade = F3(
 					$elm$core$Tuple$mapBoth,
 					toModel,
 					$elm$core$Platform$Cmd$map(toMsg),
-					A2(page.b9, msg, model));
+					A2(page.cl, msg, model));
 			});
 		var load_ = F2(
 			function (model, shared) {
@@ -6445,7 +7079,7 @@ var $author$project$Spa$Generated$Pages$upgrade = F3(
 					$elm$core$Tuple$mapBoth,
 					toModel,
 					$elm$core$Platform$Cmd$map(toMsg),
-					A2(page.ae, shared, model));
+					A2(page.ag, shared, model));
 			});
 		var init_ = F2(
 			function (params, shared) {
@@ -6454,56 +7088,56 @@ var $author$project$Spa$Generated$Pages$upgrade = F3(
 					toModel,
 					$elm$core$Platform$Cmd$map(toMsg),
 					A2(
-						page.bE,
+						page.bQ,
 						shared,
-						A3($author$project$Spa$Url$create, params, shared.bG, shared.ca)));
+						A3($author$project$Spa$Url$create, params, shared.bS, shared.cm)));
 			});
 		var bundle_ = function (model) {
 			return {
-				ae: function (_v0) {
+				ag: function (_v0) {
 					return load_(model);
 				},
-				al: function (_v1) {
-					return page.al(model);
+				ao: function (_v1) {
+					return page.ao(model);
 				},
-				b3: function (_v2) {
+				cf: function (_v2) {
 					return A2(
 						$elm$core$Platform$Sub$map,
 						toMsg,
-						page.b3(model));
+						page.cf(model));
 				},
-				cb: function (_v3) {
+				cn: function (_v3) {
 					return A2(
 						$author$project$Spa$Document$map,
 						toMsg,
-						page.cb(model));
+						page.cn(model));
 				}
 			};
 		};
-		return {aa: bundle_, bE: init_, b9: update_};
+		return {ac: bundle_, bQ: init_, cl: update_};
 	});
 var $author$project$Spa$Generated$Pages$pages = {
-	ag: A3($author$project$Spa$Generated$Pages$upgrade, $author$project$Spa$Generated$Pages$NotFound__Model, $author$project$Spa$Generated$Pages$NotFound__Msg, $author$project$Pages$NotFound$page),
-	b8: A3($author$project$Spa$Generated$Pages$upgrade, $author$project$Spa$Generated$Pages$Top__Model, $author$project$Spa$Generated$Pages$Top__Msg, $author$project$Pages$Top$page)
+	aj: A3($author$project$Spa$Generated$Pages$upgrade, $author$project$Spa$Generated$Pages$NotFound__Model, $author$project$Spa$Generated$Pages$NotFound__Msg, $author$project$Pages$NotFound$page),
+	ck: A3($author$project$Spa$Generated$Pages$upgrade, $author$project$Spa$Generated$Pages$Top__Model, $author$project$Spa$Generated$Pages$Top__Msg, $author$project$Pages$Top$page)
 };
 var $author$project$Spa$Generated$Pages$init = function (route) {
 	if (!route) {
-		return $author$project$Spa$Generated$Pages$pages.b8.bE(0);
+		return $author$project$Spa$Generated$Pages$pages.ck.bQ(0);
 	} else {
-		return $author$project$Spa$Generated$Pages$pages.ag.bE(0);
+		return $author$project$Spa$Generated$Pages$pages.aj.bQ(0);
 	}
 };
 var $author$project$Spa$Generated$Pages$bundle = function (bigModel) {
 	if (!bigModel.$) {
 		var model = bigModel.a;
-		return $author$project$Spa$Generated$Pages$pages.b8.aa(model);
+		return $author$project$Spa$Generated$Pages$pages.ck.ac(model);
 	} else {
 		var model = bigModel.a;
-		return $author$project$Spa$Generated$Pages$pages.ag.aa(model);
+		return $author$project$Spa$Generated$Pages$pages.aj.ac(model);
 	}
 };
 var $author$project$Spa$Generated$Pages$save = function (model) {
-	return $author$project$Spa$Generated$Pages$bundle(model).al(0);
+	return $author$project$Spa$Generated$Pages$bundle(model).ao(0);
 };
 var $author$project$Main$init = F3(
 	function (flags, url, key) {
@@ -6530,7 +7164,7 @@ var $author$project$Shared$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$none;
 };
 var $author$project$Spa$Generated$Pages$subscriptions = function (model) {
-	return $author$project$Spa$Generated$Pages$bundle(model).b3(0);
+	return $author$project$Spa$Generated$Pages$bundle(model).cf(0);
 };
 var $author$project$Main$subscriptions = function (model) {
 	return $elm$core$Platform$Sub$batch(
@@ -6547,11 +7181,11 @@ var $author$project$Main$subscriptions = function (model) {
 			]));
 };
 var $author$project$Spa$Document$toBrowserDocument = function (doc) {
-	return {bp: doc.bp, b6: doc.b6};
+	return {bB: doc.bB, ci: doc.ci};
 };
 var $elm$browser$Browser$Navigation$load = _Browser_load;
 var $author$project$Spa$Generated$Pages$load = function (model) {
-	return $author$project$Spa$Generated$Pages$bundle(model).ae(0);
+	return $author$project$Spa$Generated$Pages$bundle(model).ag(0);
 };
 var $elm$browser$Browser$Navigation$pushUrl = _Browser_pushUrl;
 var $elm$url$Url$addPort = F2(
@@ -6576,7 +7210,7 @@ var $elm$url$Url$addPrefixed = F3(
 	});
 var $elm$url$Url$toString = function (url) {
 	var http = function () {
-		var _v0 = url.a0;
+		var _v0 = url.bc;
 		if (!_v0) {
 			return 'http://';
 		} else {
@@ -6586,17 +7220,17 @@ var $elm$url$Url$toString = function (url) {
 	return A3(
 		$elm$url$Url$addPrefixed,
 		'#',
-		url.aK,
+		url.aT,
 		A3(
 			$elm$url$Url$addPrefixed,
 			'?',
-			url.aw,
+			url.aB,
 			_Utils_ap(
 				A2(
 					$elm$url$Url$addPort,
-					url.aZ,
-					_Utils_ap(http, url.aO)),
-				url.aX)));
+					url.a8,
+					_Utils_ap(http, url.aY)),
+				url.a6)));
 };
 var $author$project$Shared$update = F2(
 	function (msg, model) {
@@ -6611,7 +7245,7 @@ var $author$project$Spa$Generated$Pages$update = F2(
 				if (!_v0.b.$) {
 					var msg = _v0.a.a;
 					var model = _v0.b.a;
-					return A2($author$project$Spa$Generated$Pages$pages.b8.b9, msg, model);
+					return A2($author$project$Spa$Generated$Pages$pages.ck.cl, msg, model);
 				} else {
 					break _v0$2;
 				}
@@ -6619,7 +7253,7 @@ var $author$project$Spa$Generated$Pages$update = F2(
 				if (_v0.b.$ === 1) {
 					var msg = _v0.a.a;
 					var model = _v0.b.a;
-					return A2($author$project$Spa$Generated$Pages$pages.ag.b9, msg, model);
+					return A2($author$project$Spa$Generated$Pages$pages.aj.cl, msg, model);
 				} else {
 					break _v0$2;
 				}
@@ -6637,7 +7271,7 @@ var $author$project$Main$update = F2(
 						model,
 						A2(
 							$elm$browser$Browser$Navigation$pushUrl,
-							model.s.bG,
+							model.s.bS,
 							$elm$url$Url$toString(url)));
 				} else {
 					var href = msg.a.a;
@@ -6650,7 +7284,7 @@ var $author$project$Main$update = F2(
 				var original = model.s;
 				var shared = _Utils_update(
 					original,
-					{ca: url});
+					{cm: url});
 				var _v1 = A2(
 					$author$project$Spa$Generated$Pages$init,
 					$author$project$Main$fromUrl(url),
@@ -6696,36 +7330,13 @@ var $author$project$Main$update = F2(
 					A2($elm$core$Platform$Cmd$map, $author$project$Main$Pages, pageCmd));
 		}
 	});
-var $elm$html$Html$a = _VirtualDom_node('a');
-var $elm$html$Html$Attributes$class = $elm$html$Html$Attributes$stringProperty('className');
 var $elm$html$Html$header = _VirtualDom_node('header');
-var $elm$html$Html$Attributes$href = function (url) {
-	return A2(
-		$elm$html$Html$Attributes$stringProperty,
-		'href',
-		_VirtualDom_noJavaScriptUri(url));
-};
-var $elm$core$String$append = _String_append;
-var $author$project$Spa$Generated$Route$toString = function (route) {
-	var segments = function () {
-		if (!route) {
-			return _List_Nil;
-		} else {
-			return _List_fromArray(
-				['not-found']);
-		}
-	}();
-	return A2(
-		$elm$core$String$append,
-		'/',
-		A2($elm$core$String$join, '/', segments));
-};
 var $author$project$Shared$view = F2(
 	function (_v0, model) {
 		var page = _v0.x;
-		var toMsg = _v0.b7;
+		var toMsg = _v0.cj;
 		return {
-			bp: _List_fromArray(
+			bB: _List_fromArray(
 				[
 					A2(
 					$elm$html$Html$div,
@@ -6741,48 +7352,22 @@ var $author$project$Shared$view = F2(
 								[
 									$elm$html$Html$Attributes$class('fixed')
 								]),
-							_List_fromArray(
-								[
-									A2(
-									$elm$html$Html$a,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('link'),
-											$elm$html$Html$Attributes$href(
-											$author$project$Spa$Generated$Route$toString(0))
-										]),
-									_List_fromArray(
-										[
-											$elm$html$Html$text('Homepage')
-										])),
-									A2(
-									$elm$html$Html$a,
-									_List_fromArray(
-										[
-											$elm$html$Html$Attributes$class('link'),
-											$elm$html$Html$Attributes$href(
-											$author$project$Spa$Generated$Route$toString(1))
-										]),
-									_List_fromArray(
-										[
-											$elm$html$Html$text('Not found')
-										]))
-								])),
+							_List_Nil),
 							A2(
 							$elm$html$Html$div,
 							_List_fromArray(
 								[
-									$elm$html$Html$Attributes$id('page'),
+									$elm$html$Html$Attributes$id($author$project$Shared$elemId.bu),
 									$elm$html$Html$Attributes$class('overflow-auto h-screen')
 								]),
-							page.bp)
+							page.bB)
 						]))
 				]),
-			b6: page.b6
+			ci: page.ci
 		};
 	});
 var $author$project$Spa$Generated$Pages$view = function (model) {
-	return $author$project$Spa$Generated$Pages$bundle(model).cb(0);
+	return $author$project$Spa$Generated$Pages$bundle(model).cn(0);
 };
 var $author$project$Main$view = function (model) {
 	return A2(
@@ -6792,18 +7377,18 @@ var $author$project$Main$view = function (model) {
 				$author$project$Spa$Document$map,
 				$author$project$Main$Pages,
 				$author$project$Spa$Generated$Pages$view(model.x)),
-			b7: $author$project$Main$Shared
+			cj: $author$project$Main$Shared
 		},
 		model.s);
 };
 var $author$project$Main$main = $elm$browser$Browser$application(
 	{
-		bE: $author$project$Main$init,
-		bT: $author$project$Main$UrlChanged,
-		bU: $author$project$Main$LinkClicked,
-		b3: $author$project$Main$subscriptions,
-		b9: $author$project$Main$update,
-		cb: A2($elm$core$Basics$composeR, $author$project$Main$view, $author$project$Spa$Document$toBrowserDocument)
+		bQ: $author$project$Main$init,
+		b3: $author$project$Main$UrlChanged,
+		b4: $author$project$Main$LinkClicked,
+		cf: $author$project$Main$subscriptions,
+		cl: $author$project$Main$update,
+		cn: A2($elm$core$Basics$composeR, $author$project$Main$view, $author$project$Spa$Document$toBrowserDocument)
 	});
 _Platform_export({'Main':{'init':$author$project$Main$main(
 	$elm$json$Json$Decode$succeed(0))(0)}});}(this));
