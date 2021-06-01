@@ -155,8 +155,11 @@ viewWhoIs =
                     , span [ class "text-green-300 font-semibold" ] [ text "eu" ]
                     ]
                 ]
-            , div [ class "flex" ]
-                [ img [ src imgUrls.profile, class "flex-1 h-48 w-48 object-contain" ] []
+            , div [ class "flex flex-col md:flex-row items-center" ]
+                [ div [ class "relative p-6 mb-6 md:mr-6" ]
+                    [ img [ src imgUrls.profile, class "flex-1 w-48 object-contain relative" ] []
+                    , div [ class "absolute top-0 left-10 right-0 bottom-0 border-4 border-red-500" ] []
+                    ]
                 , div [ class "flex-1" ]
                     [ p []
                         [ text """
