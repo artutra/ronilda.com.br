@@ -65,9 +65,8 @@ update msg model =
                 Ok elem ->
                     ( model, toCmd (scrollAction elem.element.y) )
 
-                Err (Browser.Dom.NotFound err) ->
-                    Debug.log err
-                        ( model, Cmd.none )
+                Err (Browser.Dom.NotFound _) ->
+                    ( model, Cmd.none )
 
         ToggleCard cardNum ->
             if cardNum == 1 then
