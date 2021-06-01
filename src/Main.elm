@@ -145,4 +145,4 @@ subscriptions model =
 
 fromUrl : Url -> Route
 fromUrl =
-    Route.fromUrl >> Maybe.withDefault Route.NotFound
+    Route.fromUrl >> Maybe.withDefault Route.Top
