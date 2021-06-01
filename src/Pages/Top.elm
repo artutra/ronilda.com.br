@@ -91,7 +91,7 @@ imgUrls =
 
 view : Model -> Document Msg
 view model =
-    { title = "Homepage"
+    { title = "Ronilda Lima de Miranda"
     , body = [ viewHeader, viewWhoIs, viewAbout, viewServices model, viewContact ]
     }
 
