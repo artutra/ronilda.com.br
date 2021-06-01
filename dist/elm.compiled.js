@@ -6247,7 +6247,7 @@ var $author$project$Pages$Top$viewAbout = A2(
 									_List_Nil,
 									_List_fromArray(
 										[
-											$elm$html$Html$text('\r\n                            As palavras mais próximas para se traduzir a palavra alemã GESTALT \r\n                            são “forma” ou “configuração”. \r\n                            Os pressupostos teóricos da Gestalt-terapia estão baseados no humanismo, \r\n                            existencialismo e na fenomenologia. \r\n                            É uma abordagem da Psicologia que valoriza a qualidade da relação da \r\n                            pessoa com o meio, investe no estreitamento do contato, na percepção \r\n                            das próprias reações diante de determinadas situações e na valorização \r\n                            da experiência. Se interessa muito mais pelo que o sujeito sente no \r\n                            “Aqui Agora”, se conscientizando de suas escolhas e seu modo de \r\n                            viver a fim de, pouco a pouco, ir ampliando sua percepção e \r\n                            atribuindo seus próprios significados.\r\n                        ')
+											$elm$html$Html$text('\n                            As palavras mais próximas para se traduzir a palavra alemã GESTALT \n                            são “forma” ou “configuração”. \n                            Os pressupostos teóricos da Gestalt-terapia estão baseados no humanismo, \n                            existencialismo e na fenomenologia. \n                            É uma abordagem da Psicologia que valoriza a qualidade da relação da \n                            pessoa com o meio, investe no estreitamento do contato, na percepção \n                            das próprias reações diante de determinadas situações e na valorização \n                            da experiência. Se interessa muito mais pelo que o sujeito sente no \n                            “Aqui Agora”, se conscientizando de suas escolhas e seu modo de \n                            viver a fim de, pouco a pouco, ir ampliando sua percepção e \n                            atribuindo seus próprios significados.\n                        ')
 										]))
 								]))
 						]))
@@ -6295,8 +6295,7 @@ var $author$project$Pages$Top$viewContact = A2(
 	$elm$html$Html$section,
 	_List_fromArray(
 		[
-			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aq),
-			$elm$html$Html$Attributes$class('bg-gray-300 text-gray-900')
+			$elm$html$Html$Attributes$id($author$project$Pages$Top$elemId.aq)
 		]),
 	_List_fromArray(
 		[
@@ -6304,7 +6303,7 @@ var $author$project$Pages$Top$viewContact = A2(
 			$elm$html$Html$div,
 			_List_fromArray(
 				[
-					$elm$html$Html$Attributes$class('container mx-auto max-w-4xl flex flex-col md:flex-row items-start p-4 flex')
+					$elm$html$Html$Attributes$class('container mx-auto flex items-start py-4 flex')
 				]),
 			_List_fromArray(
 				[
@@ -6388,7 +6387,6 @@ var $author$project$Pages$Top$viewContact = A2(
 									$elm$html$Html$Attributes$width(400),
 									$elm$html$Html$Attributes$height(400),
 									$elm$html$Html$Attributes$tabindex(0),
-									A2($elm$html$Html$Attributes$style, 'width', '100%'),
 									A2($elm$html$Html$Attributes$style, 'border', '0'),
 									A2($elm$html$Html$Attributes$attribute, 'frameborder', '0'),
 									A2($elm$html$Html$Attributes$attribute, 'allowfullscreen', 'true'),
@@ -6516,7 +6514,7 @@ var $author$project$Pages$Top$viewHeader = A2(
 								]),
 							_List_fromArray(
 								[
-									$elm$html$Html$text('\r\n                    "Quando alguém compreende como sinto e como sou, sem querer me analisar ou julgar, \r\n                    então, nesse clima, posso desabrochar e crescer."\r\n                    ')
+									$elm$html$Html$text('\n                    "Quando alguém compreende como sinto e como sou, sem querer me analisar ou julgar, \n                    então, nesse clima, posso desabrochar e crescer."\n                    ')
 								])),
 							A2(
 							$elm$html$Html$p,
@@ -6602,7 +6600,7 @@ var $author$project$Pages$Top$serviceCard1 = F2(
 						]),
 					_List_fromArray(
 						[
-							$elm$html$Html$text('\r\n                Na terapia individual, ao mesmo tempo em que o terapeuta não \r\n                abdica de sua autoridade, a emprega de modo que o cliente venha \r\n                a ser a autoridade em sua própria vida.')
+							$elm$html$Html$text('\n                Na terapia individual, ao mesmo tempo em que o terapeuta não \n                abdica de sua autoridade, a emprega de modo que o cliente venha \n                a ser a autoridade em sua própria vida.')
 						])),
 					A2(
 					$elm$html$Html$div,
@@ -6633,7 +6631,7 @@ var $author$project$Pages$Top$serviceCard1 = F2(
 					_List_Nil,
 					_List_fromArray(
 						[
-							$elm$html$Html$text('\r\n                Na terapia individual, o meu trabalho clínico é de facilitadora \r\n                para que meu cliente se torne mais consciente de si mesmo, \r\n                capaz de revelar-se na interação com seu meio e com o outro. \r\n                Nessa caminhada, na sua busca pessoal, seja com sua dor psíquica, \r\n                seja com a sua sede de autoconhecimento, o cliente possa sentir-se \r\n                capaz de trilhar novas descobertas, ampliar as próprias habilidades, \r\n                criar ou aprimorar o próprio estilo de ser e estar no mundo.\r\n                ')
+							$elm$html$Html$text('\n                Na terapia individual, o meu trabalho clínico é de facilitadora \n                para que meu cliente se torne mais consciente de si mesmo, \n                capaz de revelar-se na interação com seu meio e com o outro. \n                Nessa caminhada, na sua busca pessoal, seja com sua dor psíquica, \n                seja com a sua sede de autoconhecimento, o cliente possa sentir-se \n                capaz de trilhar novas descobertas, ampliar as próprias habilidades, \n                criar ou aprimorar o próprio estilo de ser e estar no mundo.\n                ')
 						])),
 					A2(
 					$elm$html$Html$div,
@@ -6687,7 +6685,7 @@ var $author$project$Pages$Top$serviceCard2 = F2(
 						]),
 					_List_fromArray(
 						[
-							$elm$html$Html$text('\r\n                Segundo Cardella (2009), assim como a vida, pela qual \r\n                somos responsáveis, uma relação necessita do cultivo \r\n                de ambos os parceiros para durar e bem durar, \r\n                mas seu destino transcende todas as tentativas de \r\n                controlar e determinar os acontecimentos.\r\n                ')
+							$elm$html$Html$text('\n                Segundo Cardella (2009), assim como a vida, pela qual \n                somos responsáveis, uma relação necessita do cultivo \n                de ambos os parceiros para durar e bem durar, \n                mas seu destino transcende todas as tentativas de \n                controlar e determinar os acontecimentos.\n                ')
 						])),
 					A2(
 					$elm$html$Html$div,
@@ -6718,7 +6716,7 @@ var $author$project$Pages$Top$serviceCard2 = F2(
 					_List_Nil,
 					_List_fromArray(
 						[
-							$elm$html$Html$text('\r\n                As palavras mais próximas para se traduzir a palavra alemã \r\n                GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da \r\n                Gestalt-terapia estão baseados no humanismo, existencialismo e na \r\n                fenomenologia. É uma abordagem da Psicologia que valoriza a \r\n                qualidade da relação da pessoa com o meio, investe no estreitamento \r\n                do contato, na percepção das próprias reações diante de determinadas \r\n                situações e na valorização da experiência. Se interessa muito mais \r\n                pelo que o sujeito sente no “Aqui Agora”, se conscientizando de \r\n                suas escolhas e seu modo de viver a fim de, pouco a pouco, ir \r\n                ampliando sua percepção e atribuindo seus próprios significados.\r\n                ')
+							$elm$html$Html$text('\n                As palavras mais próximas para se traduzir a palavra alemã \n                GESTALT são “forma” ou “configuração”. Os pressupostos teóricos da \n                Gestalt-terapia estão baseados no humanismo, existencialismo e na \n                fenomenologia. É uma abordagem da Psicologia que valoriza a \n                qualidade da relação da pessoa com o meio, investe no estreitamento \n                do contato, na percepção das próprias reações diante de determinadas \n                situações e na valorização da experiência. Se interessa muito mais \n                pelo que o sujeito sente no “Aqui Agora”, se conscientizando de \n                suas escolhas e seu modo de viver a fim de, pouco a pouco, ir \n                ampliando sua percepção e atribuindo seus próprios significados.\n                ')
 						])),
 					A2(
 					$elm$html$Html$div,
@@ -6901,7 +6899,7 @@ var $author$project$Pages$Top$viewWhoIs = A2(
 									_List_Nil,
 									_List_fromArray(
 										[
-											$elm$html$Html$text('\r\n                            Psicóloga, Gestalt-terapeuta pelo Instituto Gestalt do Ceará, \r\n                            graduada em Psicologia pelo Centro Universitário Santo Agostinho (Teresina-PI) \r\n                            e graduada em Comunicação Social pela Universidade Federal do Maranhão. \r\n                        ')
+											$elm$html$Html$text('\n                            Psicóloga, Gestalt-terapeuta pelo Instituto Gestalt do Ceará, \n                            graduada em Psicologia pelo Centro Universitário Santo Agostinho (Teresina-PI) \n                            e graduada em Comunicação Social pela Universidade Federal do Maranhão. \n                        ')
 										])),
 									A2($elm$html$Html$br, _List_Nil, _List_Nil),
 									A2(
@@ -6909,7 +6907,7 @@ var $author$project$Pages$Top$viewWhoIs = A2(
 									_List_Nil,
 									_List_fromArray(
 										[
-											$elm$html$Html$text('\r\n                            A Gestalt-terapia é a minha principal linha de atuação com foco no atendimento de adultos e \r\n                            casais.\r\n                        ')
+											$elm$html$Html$text('\n                            A Gestalt-terapia é a minha principal linha de atuação com foco no atendimento de adultos e \n                            casais.\n                        ')
 										]))
 								]))
 						]))
